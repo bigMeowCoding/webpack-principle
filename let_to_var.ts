@@ -4,6 +4,7 @@ import generate from "@babel/generator";
 
 const code = `let a = 'let'; let b = 2`;
 const ast = parse(code, { sourceType: "module" });
+
 if (ast) {
   traverse(ast, {
     enter: (item) => {

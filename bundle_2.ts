@@ -68,6 +68,10 @@ writeFileSync("dist_2.js", generateCode());
 console.log(depRelation);
 console.log("done");
 
+/**
+ *
+ * @param filepath 文件绝对地址
+ */
 function collectCodeAndDeps(filepath: string) {
   const key = getProjectPath(filepath); // 文件的项目路径，如 index.js
   if (depRelation.find((i) => i.key === key)) {
@@ -86,7 +90,6 @@ function collectCodeAndDeps(filepath: string) {
     return;
   }
   const item: Dep = { key, deps: [], code: es5Code };
-
   depRelation.push(item);
   const ast = parse(code, { sourceType: "module" });
   // 分析文件依赖，将内容放至 depRelation
