@@ -85,7 +85,10 @@ function collectCodeAndDeps(filepath: string) {
     return;
   }
   // 获取文件内容，将内容放至 depRelation
-  const code = readFileSync(filepath).toString();
+  let code = readFileSync(filepath).toString();
+  if (/\.css$/.test(filepath)) {
+    code = require("./loaders/css-loader")(code);
+  }
   // 初始化 depRelation[key]
   // 将代码转为 AST
   const transformCode = babel.transform(code, {
